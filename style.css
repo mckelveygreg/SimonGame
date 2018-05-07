@@ -1,0 +1,67 @@
+* {
+    box-sizing: border-box;
+}
+
+#app {
+  
+   
+    position: relative;
+   
+}
+#gameboard {
+    
+    display: grid;
+    grid-template: 1fr 1fr / 1fr 1fr;
+    
+    width: 800px;
+    grid-gap: 1px;
+}
+
+.colors {
+    width: 400px;
+    height: 400px;
+    position: relative;
+    border: 40px solid black;
+}
+.colors:hover {
+    background: radial-gradient(white, transparent);
+}
+
+#green {
+    background-color: green;
+    border-top-left-radius: 100%;
+}
+
+#red {
+    background-color: red;
+    border-top-right-radius: 100%;
+}
+
+#yellow {
+    background-color: yellow;
+    border-bottom-left-radius: 100%;
+}
+
+#blue {
+    background-color: blue;
+    border-bottom-right-radius: 100%;
+}
+
+#settings {
+    position: absolute;
+    /* margin: auto; */
+    left: 200px;
+    top: 200px;
+    background-color: black;
+    border-radius: 50%;
+    width: 400px;
+    height: 400px;
+    z-index: 3;
+    color: white;
+    display: flex;
+    justify-content: center;
+}
+
+#start {
+    
+}
