@@ -58,8 +58,16 @@
     height: 400px;
     z-index: 3;
     color: white;
-    display: flex;
     justify-content: center;
+    text-align: center;
+}
+
+#settings h1 {
+    font-size: 4rem;
+}
+#counter {
+    display: inline-block;
+    
 }
 
 #start {
