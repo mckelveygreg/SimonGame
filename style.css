@@ -65,7 +65,7 @@
 #settings h1 {
     font-size: 4rem;
 }
-#counter {
+#counter, h2 {
     display: inline-block;
     
 }

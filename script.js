@@ -2,7 +2,9 @@ var sounds = {
     green: new Audio('sounds/simonSound1.mp3'),
     red: new Audio('sounds/simonSound2.mp3'),
     yellow: new Audio('sounds/simonSound3.mp3'),
-    blue: new Audio('sounds/simonSound4.mp3')
+    blue: new Audio('sounds/simonSound4.mp3'),
+    applause: new Audio('sounds/umgawa.wav'),
+    boo: new Audio('sounds/sfxboo.wav')
 };
 // var soundGreen = new Audio('sounds/simonSound1.mp3');
 // var soundRed = new Audio('sounds/simonSound2.mp3');
@@ -10,24 +12,30 @@ var sounds = {
 // var soundRed = new Audio('sounds/simonSound4.mp3');
 
 var colors = document.querySelectorAll('.colors');
-
-
+var start = document.querySelector('#start');
+var counter = document.querySelector('#counter');
 
 var gameboard = {
   green: colors[0],
   red: colors[1],
   yellow: colors[2],
   blue: colors[3]  
-}; // do i need this?
+};
 
 var colorsPlayed = [];
+
+start.addEventListener('click', function() {
+    start.innerHTML = 'Focus!';
+    randomColorPicker();
+    colorPlayer(colorsPlayed);
+});
+
 colors.forEach(function(color) {
     var id = color.id;
     color.addEventListener('click', function() {
         sounds[id].play();
-        
+        testMemory(id);
     });
-    
 });
 
 function randomColorPlayer () {
@@ -44,7 +52,7 @@ function colorLightUp(color) {
     gameboard[color].classList.add('lit');
     setTimeout(function() {
         gameboard[color].classList.remove('lit');
-    }, 750);
+    }, 600);
 }
 
 function colorPlayer(arr) {
@@ -57,7 +65,56 @@ function colorPlayer(arr) {
         colorLightUp(arr[i]);
         i++;
     }, 750);
+    
 }
+
+function randomColorPicker() {
+    var randomColor = colors[Math.floor(Math.random()*colors.length)].id;
+    //sounds[randomColor].play();
+    console.log(randomColor);
+    colorsPlayed.push(randomColor);
+}
+
+/*
+- start
+- Simon plays, records
+- Player tries, try tested
+- if correct, simon plays again, else game over
+*/
+var indx = 0;
+var level = 1;
+var testMemory = function(color) {
+    if (color == colorsPlayed[indx] && indx <= colorsPlayed.length - 2) {
+        console.log('encouraging messege');
+        indx++;
+        //game();
+    } else if (color == colorsPlayed[indx] && indx == colorsPlayed.length - 1) {
+        console.log('you passed this level');
+        sounds.applause.play();
+        sounds.applause.addEventListener('ended', function() {
+            console.log('ended, time to move on');
+            randomColorPicker();
+            colorPlayer(colorsPlayed);
+        });
+        level++;
+        counter.innerHTML = level;
+        indx = 0;
+        
+    } else {
+        console.log('you lost?');
+        sounds.boo.play();
+        level = 1;
+        indx = 0;
+        colorsPlayed = [];
+        counter.innerHTML = level;
+        start.innerHTML = 'Try again?';
+    }
+};
+
+var game = function() {
+    randomColorPicker();
+    colorPlayer(colorsPlayed);
+};
 
 var State = function (old) {
     this.turn = '';
