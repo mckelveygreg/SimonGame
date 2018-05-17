@@ -1,12 +1,13 @@
 # SimonGame
-FreeCodeCamp Front End Project
+###FreeCodeCamp Front End Project
 
 Link:  https://mckelveygreg.github.io/SimonGame/
 
 DONE
 - Design
+- Game functionality JS
+- Styled
 
 TODO:
-- align settings
-- style counter and start button
-- Javascript
+- clean up unused code
+- Add comments
